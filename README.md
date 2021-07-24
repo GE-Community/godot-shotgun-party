@@ -38,3 +38,6 @@ But this is subject to change and a running dedicated server is considered.
 - Movement: `W/A/S/D`
 - Jump: `Space`
 - Fire: `Left Mouse Button`
+
+## Discussion
+Feel free to create an issue or join a dedicated [Discord server](https://discord.gg/udR6hJeMXm).
