@@ -60,7 +60,7 @@ func spawn_ragdoll():
 	ragdoll = ragdoll_scn.instance()
 	ragdoll.body = self
 	ragdoll.get_node("mesh_instance").get_surface_material(0).set_shader_param("color", color)
-	Game.garbage.add_child(ragdoll)
+	Game.main.main_pass.add_child(ragdoll)
 	ragdoll.global_transform = $model/skeleton.global_transform
 	for i in ragdoll.get_bone_count():
 		ragdoll.set_bone_pose(i, $model/skeleton.get_bone_pose(i))

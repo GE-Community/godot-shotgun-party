@@ -2,6 +2,7 @@
 
 ### Gameplay
 - More boomstick
+- Settings
 
 ### Misc
 - Setup a Discord server

@@ -14,12 +14,6 @@ anchor_bottom = 1.0
 margin_right = 0.0
 margin_bottom = 0.0
 
-[node name="main_pass" parent="pass_3/viewport/pass_2/viewport" index="0"]
-stretch_shrink = 3
-
-[node name="viewport" parent="pass_3/viewport/pass_2/viewport/main_pass" index="0"]
-size = Vector2( 426, 240 )
-
 [node name="menu" parent="." instance=ExtResource( 2 )]
 rect_min_size = Vector2( 1280, 720 )
 
