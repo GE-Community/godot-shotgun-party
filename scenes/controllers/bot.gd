@@ -9,6 +9,8 @@ var strafe_timer : float = 0.0
 var strafe_dirs : Array = [-1.0, 0.0, 1.0]
 var strafe_dir : float = 0.0
 
+var logic_timer : float = 0.0
+
 func _ready():
 	var gobots = get_tree().get_nodes_in_group("gobots")
 	set_target(gobots[randi() % gobots.size()])
@@ -26,17 +28,24 @@ func _physics_process(delta):
 
 func process_logic(delta):
 	var target_origin = target.head.global_transform.origin
-	# Visibility
-	var target_visible = false
-	var ray_state = body.get_world().direct_space_state
-	var ray_result = ray_state.intersect_ray(body.head.global_transform.origin, target_origin, [self], 10)
-	if ray_result:
-		target_visible = ray_result.collider == target and !target.dead
+	logic_timer -= delta
+	if logic_timer <= 0.0:
+		logic_timer = delta * 10.0
+		# Visibility
+		var target_visible = false
+		var ray_state = body.get_world().direct_space_state
+		var ray_result = ray_state.intersect_ray(body.head.global_transform.origin, target_origin, [self], 10)
+		if ray_result:
+			target_visible = ray_result.collider == target and !target.dead
+		# Check distance
+		if target_origin.distance_squared_to(body.global_transform.origin) > 16.0:
+			body.dir -= body.global_transform.basis.z
+		# Random actions
+		body.action_primary = randf() <= 0.05 and target_visible
+		body.action_jump = randf() <= 0.01
+	# Simple logic
+	body.dir -= body.global_transform.basis.z
 	look_at_target(target_origin, delta)
-	if target_origin.distance_squared_to(body.global_transform.origin) > 16.0:
-		body.dir -= body.global_transform.basis.z
-	body.action_primary = randf() <= 0.05 and target_visible
-	body.action_jump = randf() <= 0.01
 	random_strafe(delta)
 
 func random_strafe(delta):

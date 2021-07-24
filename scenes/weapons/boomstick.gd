@@ -55,6 +55,7 @@ func primary():
 					var impulse = (ray_result.position - ray_from).normalized() * 15.0
 					ray_result.collider.add_impulse(impulse)
 					ray_result.collider.hit(MAX_PELLET_DAMAGE * rand_range(0.9, 1.0), shooter)
+					Game.create_impact(0, ray_result.collider, ray_result.position, ray_result.normal)
 				if ray_result.collider is StaticBody:
 					Game.create_impact(0, ray_result.collider, ray_result.position, ray_result.normal)
 		# Visual ray

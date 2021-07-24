@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=2]
+[gd_scene load_steps=43 format=2]
 
 [ext_resource path="res://materials/gobot/boomstick_emission.material" type="Material" id=1]
 [ext_resource path="res://scenes/gobot/gobot.gd" type="Script" id=3]
@@ -4088,6 +4088,13 @@ blend_point_2/node = SubResource( 22 )
 blend_point_2/pos = 0.0
 snap = 0.5
 
+[sub_resource type="AnimationNodeOneShot" id=36]
+filter_enabled = true
+filters = [ "skeleton:arm_l", "skeleton:arm_r", "skeleton:clavicle_l", "skeleton:clavicle_r", "skeleton:forearm_l", "skeleton:forearm_r", "skeleton:hand_l", "skeleton:hand_r", "skeleton:spine_01", "skeleton:spine_02" ]
+
+[sub_resource type="AnimationNodeAnimation" id=37]
+animation = "aim_fire_add"
+
 [sub_resource type="AnimationNodeAnimation" id=24]
 animation = "air_loop"
 
@@ -4134,15 +4141,19 @@ transitions = [ "air", "ground", SubResource( 31 ), "ground", "air", SubResource
 start_node = "air"
 
 [sub_resource type="AnimationNodeBlendTree" id=34]
-graph_offset = Vector2( -353, 176 )
+graph_offset = Vector2( -408, 127 )
 nodes/aim/node = SubResource( 19 )
 nodes/aim/position = Vector2( 60, 160 )
 nodes/aim_blend/node = SubResource( 23 )
 nodes/aim_blend/position = Vector2( -180, 300 )
-nodes/output/position = Vector2( 340, 160 )
+nodes/fire/node = SubResource( 36 )
+nodes/fire/position = Vector2( 300, 160 )
+nodes/fire_anim/node = SubResource( 37 )
+nodes/fire_anim/position = Vector2( 80, 340 )
+nodes/output/position = Vector2( 540, 160 )
 nodes/sm/node = SubResource( 33 )
 nodes/sm/position = Vector2( -180, 160 )
-node_connections = [ "output", 0, "aim", "aim", 0, "sm", "aim", 1, "aim_blend" ]
+node_connections = [ "output", 0, "fire", "aim", 0, "sm", "aim", 1, "aim_blend", "fire", 0, "aim", "fire", 1, "fire_anim" ]
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=35]
 
@@ -4305,7 +4316,7 @@ bones/22/name = "hand_r"
 bones/22/parent = 21
 bones/22/rest = Transform( 0.999817, -0.0187782, 0.00348197, 0.0189235, 0.998672, -0.047903, -0.00257782, 0.0479602, 0.998846, -8.94999e-08, 0.348891, -7.26254e-09 )
 bones/22/enabled = true
-bones/22/bound_children = [ NodePath("a_hand_r") ]
+bones/22/bound_children = [  ]
 bones/23/name = "thumb_1_r"
 bones/23/parent = 22
 bones/23/rest = Transform( 0.557761, -0.82911, 0.0384549, 0.441899, 0.257418, -0.859338, 0.702587, 0.496298, 0.509961, -0.0112446, 0.0851252, 0.086132 )
@@ -4394,7 +4405,7 @@ material/0 = ExtResource( 5 )
 material/1 = ExtResource( 4 )
 
 [node name="a_hand_r" type="BoneAttachment" parent="model/skeleton"]
-transform = Transform( -0.974152, -0.172704, 0.145607, 0.21758, -0.890627, 0.399299, 0.0607211, 0.42066, 0.905184, -0.665233, 0.771534, 0.157155 )
+transform = Transform( -0.997434, -0.0325528, 0.0637647, 0.0697226, -0.239426, 0.968407, -0.016258, 0.970367, 0.241081, -0.60439, 0.980324, -0.0397277 )
 bone_name = "hand_r"
 
 [node name="boomstick" type="MeshInstance" parent="model/skeleton/a_hand_r"]
@@ -4425,8 +4436,10 @@ anims/slide_pose = SubResource( 18 )
 [node name="animation_tree" type="AnimationTree" parent="model"]
 tree_root = SubResource( 34 )
 anim_player = NodePath("../animation_player")
+active = true
 parameters/aim/blend_amount = 1.0
 parameters/aim_blend/blend_position = 0.0
+parameters/fire/active = false
 parameters/sm/playback = SubResource( 35 )
 parameters/sm/ground/blend_position = Vector2( 0, 0 )
 

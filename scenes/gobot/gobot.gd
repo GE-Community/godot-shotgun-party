@@ -53,8 +53,8 @@ func process_anims(delta):
 	aim_blend = lerp_angle(aim_blend, aim_target, delta * 5.0)
 	$model/animation_tree.set("parameters/aim_blend/blend_position", aim_blend)
 	# TODO: Add fire animation
-	# if action_primary:
-	#	$model/animation_tree.set("parameters/fire/active", true)
+	if action_primary:
+		$model/animation_tree.set("parameters/fire/active", true)
 
 func spawn_ragdoll():
 	ragdoll = ragdoll_scn.instance()
@@ -89,8 +89,8 @@ func add_impulse(impulse : Vector3):
 
 func die():
 	dead = true
+	visible = false
 	$collision_shape.disabled = true
-	$model.visible = false
 	if owner and owner is Player:
 		owner.get_node("holder").visible = false
 	spawn_ragdoll()
@@ -99,6 +99,7 @@ func die():
 func respawn():
 	dead = false
 	health = 100.0
+	vel = Vector3.ZERO
 	$collision_shape.disabled = false
 	$model.visible = true
 	if owner and owner is Player:

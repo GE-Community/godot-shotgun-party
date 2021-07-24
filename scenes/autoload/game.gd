@@ -14,7 +14,7 @@ onready var controllers = [
 	preload("res://scenes/controllers/peer.tscn"),
 	preload("res://scenes/controllers/bot.tscn")
 ]
-var colors = ["#28304e", "#125624"]
+var colors = ["#333d55", "#c59654"]
 # Impacts
 onready var impact_scns = [preload("res://scenes/impacts/metal.tscn")]
 

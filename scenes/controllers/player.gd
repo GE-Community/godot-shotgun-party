@@ -2,7 +2,7 @@ extends Controller
 class_name Player
 
 # Mouse
-var mouse_sens : float = 6.0
+var mouse_sens : float = 3.0
 var relative : Vector2
 
 # Leaning
