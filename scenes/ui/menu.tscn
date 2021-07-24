@@ -3,16 +3,16 @@
 [ext_resource path="res://sounds/menu/drone.ogg" type="AudioStream" id=2]
 [ext_resource path="res://sounds/menu/click.wav" type="AudioStream" id=3]
 [ext_resource path="res://fonts/poppins.ttf" type="DynamicFontData" id=5]
-[ext_resource path="res://scenes/menu/menu.gd" type="Script" id=6]
+[ext_resource path="res://scenes/ui/menu.gd" type="Script" id=6]
 [ext_resource path="res://fonts/poppins_bold.ttf" type="DynamicFontData" id=7]
 [ext_resource path="res://misc/default.theme" type="Theme" id=9]
 
 [sub_resource type="DynamicFont" id=1]
-size = 14
+size = 32
 font_data = ExtResource( 5 )
 
 [sub_resource type="DynamicFont" id=2]
-size = 32
+size = 64
 font_data = ExtResource( 7 )
 
 [sub_resource type="StyleBoxEmpty" id=3]
@@ -26,12 +26,15 @@ font_data = ExtResource( 7 )
 [sub_resource type="StyleBoxEmpty" id=7]
 
 [sub_resource type="DynamicFont" id=8]
-size = 24
+size = 48
 font_data = ExtResource( 5 )
 
 [node name="menu" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_right = -640.0
+margin_bottom = -360.0
+rect_min_size = Vector2( 1920, 1080 )
 theme = ExtResource( 9 )
 script = ExtResource( 6 )
 __meta__ = {
@@ -39,6 +42,8 @@ __meta__ = {
 }
 
 [node name="bg" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
 rect_min_size = Vector2( 1280, 720 )
 color = Color( 0.215686, 0.227451, 0.262745, 1 )
 __meta__ = {
@@ -78,8 +83,8 @@ __meta__ = {
 }
 
 [node name="title" type="Label" parent="container"]
-margin_right = 1152.0
-margin_bottom = 46.0
+margin_right = 1792.0
+margin_bottom = 91.0
 custom_fonts/font = SubResource( 2 )
 text = "Godot Shotgun Party"
 __meta__ = {
@@ -87,16 +92,16 @@ __meta__ = {
 }
 
 [node name="main" type="GridContainer" parent="container"]
-margin_top = 62.0
-margin_right = 1152.0
-margin_bottom = 238.0
+margin_top = 107.0
+margin_right = 1792.0
+margin_bottom = 339.0
 rect_min_size = Vector2( 200, 0 )
 custom_constants/vseparation = 16
 custom_constants/hseparation = 16
 
 [node name="host" type="Button" parent="container/main"]
 margin_right = 200.0
-margin_bottom = 32.0
+margin_bottom = 46.0
 rect_min_size = Vector2( 200, 32 )
 custom_styles/hover = SubResource( 3 )
 custom_styles/pressed = SubResource( 4 )
@@ -108,9 +113,9 @@ flat = true
 align = 0
 
 [node name="connect" type="Button" parent="container/main"]
-margin_top = 48.0
+margin_top = 62.0
 margin_right = 200.0
-margin_bottom = 80.0
+margin_bottom = 108.0
 rect_min_size = Vector2( 200, 32 )
 custom_styles/hover = SubResource( 3 )
 custom_styles/pressed = SubResource( 4 )
@@ -122,24 +127,23 @@ flat = true
 align = 0
 
 [node name="settings" type="Button" parent="container/main"]
-margin_top = 96.0
+margin_top = 124.0
 margin_right = 200.0
-margin_bottom = 128.0
+margin_bottom = 170.0
 rect_min_size = Vector2( 200, 32 )
 custom_styles/hover = SubResource( 3 )
 custom_styles/pressed = SubResource( 4 )
 custom_styles/focus = SubResource( 5 )
 custom_styles/disabled = SubResource( 6 )
 custom_styles/normal = SubResource( 7 )
-disabled = true
 text = "Settings"
 flat = true
 align = 0
 
 [node name="quit" type="Button" parent="container/main"]
-margin_top = 144.0
+margin_top = 186.0
 margin_right = 200.0
-margin_bottom = 176.0
+margin_bottom = 232.0
 rect_min_size = Vector2( 200, 32 )
 custom_styles/hover = SubResource( 3 )
 custom_styles/pressed = SubResource( 4 )
@@ -152,14 +156,14 @@ align = 0
 
 [node name="host" type="VBoxContainer" parent="container"]
 visible = false
-margin_top = 62.0
-margin_right = 1152.0
-margin_bottom = 241.0
+margin_top = 107.0
+margin_right = 1792.0
+margin_bottom = 403.0
 custom_constants/separation = 16
 
 [node name="subtitle" type="Label" parent="container/host"]
-margin_right = 1152.0
-margin_bottom = 35.0
+margin_right = 1792.0
+margin_bottom = 68.0
 custom_fonts/font = SubResource( 8 )
 text = "Host"
 valign = 2
@@ -168,100 +172,100 @@ __meta__ = {
 }
 
 [node name="bot_count" type="HBoxContainer" parent="container/host"]
-margin_top = 51.0
-margin_right = 1152.0
-margin_bottom = 83.0
+margin_top = 84.0
+margin_right = 1792.0
+margin_bottom = 144.0
 custom_constants/separation = 32
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="label" type="Label" parent="container/host/bot_count"]
-margin_right = 200.0
-margin_bottom = 32.0
-rect_min_size = Vector2( 200, 32 )
+margin_right = 320.0
+margin_bottom = 60.0
+rect_min_size = Vector2( 320, 60 )
 text = "Bots to spawn"
 valign = 1
 
 [node name="slider" type="HSlider" parent="container/host/bot_count"]
-margin_left = 232.0
-margin_right = 392.0
-margin_bottom = 32.0
-rect_min_size = Vector2( 160, 32 )
+margin_left = 352.0
+margin_right = 672.0
+margin_bottom = 60.0
+rect_min_size = Vector2( 320, 60 )
 rounded = true
 tick_count = 5
 ticks_on_borders = true
 
 [node name="value" type="Label" parent="container/host/bot_count"]
-margin_left = 424.0
-margin_right = 435.0
-margin_bottom = 32.0
-rect_min_size = Vector2( 0, 32 )
+margin_left = 704.0
+margin_right = 724.0
+margin_bottom = 60.0
+rect_min_size = Vector2( 0, 60 )
 text = "0"
 valign = 1
 
 [node name="max_score" type="HBoxContainer" parent="container/host"]
-margin_top = 99.0
-margin_right = 1152.0
-margin_bottom = 131.0
+margin_top = 160.0
+margin_right = 1792.0
+margin_bottom = 220.0
 custom_constants/separation = 32
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="label" type="Label" parent="container/host/max_score"]
-margin_right = 200.0
-margin_bottom = 32.0
-rect_min_size = Vector2( 200, 32 )
+margin_right = 320.0
+margin_bottom = 60.0
+rect_min_size = Vector2( 320, 60 )
 text = "Maximum score"
 valign = 1
 
 [node name="slider" type="HSlider" parent="container/host/max_score"]
-margin_left = 232.0
-margin_right = 392.0
-margin_bottom = 32.0
-rect_min_size = Vector2( 160, 32 )
+margin_left = 352.0
+margin_right = 672.0
+margin_bottom = 60.0
+rect_min_size = Vector2( 320, 60 )
 rounded = true
 tick_count = 5
 ticks_on_borders = true
 
 [node name="value" type="Label" parent="container/host/max_score"]
-margin_left = 424.0
-margin_right = 435.0
-margin_bottom = 32.0
-rect_min_size = Vector2( 0, 32 )
+margin_left = 704.0
+margin_right = 724.0
+margin_bottom = 60.0
+rect_min_size = Vector2( 0, 60 )
 text = "0"
 valign = 1
 
 [node name="buttons" type="HBoxContainer" parent="container/host"]
-margin_top = 147.0
-margin_right = 1152.0
-margin_bottom = 179.0
+margin_top = 236.0
+margin_right = 1792.0
+margin_bottom = 296.0
 custom_constants/separation = 32
 
 [node name="host" type="Button" parent="container/host/buttons"]
-margin_right = 200.0
-margin_bottom = 32.0
-rect_min_size = Vector2( 200, 0 )
+margin_right = 320.0
+margin_bottom = 60.0
+rect_min_size = Vector2( 320, 60 )
 text = "Host a game"
 
 [node name="back" type="Button" parent="container/host/buttons"]
-margin_left = 232.0
-margin_right = 432.0
-margin_bottom = 32.0
-rect_min_size = Vector2( 200, 0 )
+margin_left = 352.0
+margin_right = 672.0
+margin_bottom = 60.0
+rect_min_size = Vector2( 320, 60 )
 text = "Back"
 
 [node name="connect" type="VBoxContainer" parent="container"]
 visible = false
-margin_top = 265.0
-margin_right = 824.0
-margin_bottom = 400.0
+margin_top = 107.0
+margin_right = 1792.0
+margin_bottom = 327.0
 custom_constants/separation = 16
 
 [node name="subtitle" type="Label" parent="container/connect"]
-margin_right = 824.0
-margin_bottom = 35.0
+margin_right = 1792.0
+margin_bottom = 68.0
 custom_fonts/font = SubResource( 8 )
 text = "Connect"
 valign = 2
@@ -270,42 +274,149 @@ __meta__ = {
 }
 
 [node name="ip" type="HBoxContainer" parent="container/connect"]
-margin_top = 51.0
-margin_right = 824.0
-margin_bottom = 87.0
+margin_top = 84.0
+margin_right = 1792.0
+margin_bottom = 144.0
 custom_constants/separation = 32
 
 [node name="label" type="Label" parent="container/connect/ip"]
-margin_top = 5.0
-margin_right = 200.0
-margin_bottom = 31.0
-rect_min_size = Vector2( 200, 0 )
+margin_right = 320.0
+margin_bottom = 60.0
+rect_min_size = Vector2( 320, 60 )
 text = "Host address"
+valign = 1
 
 [node name="edit" type="LineEdit" parent="container/connect/ip"]
-margin_left = 232.0
-margin_right = 432.0
-margin_bottom = 36.0
-rect_min_size = Vector2( 200, 0 )
+margin_left = 352.0
+margin_right = 672.0
+margin_bottom = 60.0
+rect_min_size = Vector2( 320, 60 )
 text = "localhost"
 
 [node name="buttons" type="HBoxContainer" parent="container/connect"]
-margin_top = 103.0
-margin_right = 824.0
-margin_bottom = 135.0
+margin_top = 160.0
+margin_right = 1792.0
+margin_bottom = 220.0
 custom_constants/separation = 32
 
 [node name="connect" type="Button" parent="container/connect/buttons"]
-margin_right = 200.0
-margin_bottom = 32.0
-rect_min_size = Vector2( 200, 0 )
+margin_right = 320.0
+margin_bottom = 60.0
+rect_min_size = Vector2( 320, 60 )
 text = "Connect to host"
 
 [node name="back" type="Button" parent="container/connect/buttons"]
-margin_left = 232.0
-margin_right = 432.0
-margin_bottom = 32.0
-rect_min_size = Vector2( 200, 0 )
+margin_left = 352.0
+margin_right = 672.0
+margin_bottom = 60.0
+rect_min_size = Vector2( 320, 60 )
+text = "Back"
+
+[node name="settings" type="VBoxContainer" parent="container"]
+visible = false
+margin_top = 107.0
+margin_right = 1792.0
+margin_bottom = 403.0
+custom_constants/separation = 16
+
+[node name="subtitle" type="Label" parent="container/settings"]
+margin_right = 1792.0
+margin_bottom = 68.0
+custom_fonts/font = SubResource( 8 )
+text = "Settings"
+valign = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="res" type="HBoxContainer" parent="container/settings"]
+margin_top = 84.0
+margin_right = 1792.0
+margin_bottom = 144.0
+custom_constants/separation = 32
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="label" type="Label" parent="container/settings/res"]
+margin_right = 320.0
+margin_bottom = 60.0
+rect_min_size = Vector2( 320, 60 )
+text = "Resolution"
+valign = 1
+
+[node name="slider" type="HSlider" parent="container/settings/res"]
+margin_left = 352.0
+margin_right = 672.0
+margin_bottom = 60.0
+rect_min_size = Vector2( 320, 60 )
+max_value = 6.0
+value = 3.0
+rounded = true
+tick_count = 3
+ticks_on_borders = true
+
+[node name="value" type="Label" parent="container/settings/res"]
+margin_left = 704.0
+margin_right = 842.0
+margin_bottom = 60.0
+rect_min_size = Vector2( 0, 60 )
+text = "1280x720"
+valign = 1
+
+[node name="res_scale" type="HBoxContainer" parent="container/settings"]
+margin_top = 160.0
+margin_right = 1792.0
+margin_bottom = 220.0
+custom_constants/separation = 32
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="label" type="Label" parent="container/settings/res_scale"]
+margin_right = 320.0
+margin_bottom = 60.0
+rect_min_size = Vector2( 320, 60 )
+text = "Resolution scale"
+valign = 1
+
+[node name="slider" type="HSlider" parent="container/settings/res_scale"]
+margin_left = 352.0
+margin_right = 672.0
+margin_bottom = 60.0
+rect_min_size = Vector2( 320, 60 )
+min_value = 0.1
+max_value = 1.0
+step = 0.1
+value = 1.0
+tick_count = 2
+ticks_on_borders = true
+
+[node name="value" type="Label" parent="container/settings/res_scale"]
+margin_left = 704.0
+margin_right = 714.0
+margin_bottom = 60.0
+rect_min_size = Vector2( 0, 60 )
+text = "1"
+valign = 1
+
+[node name="buttons" type="HBoxContainer" parent="container/settings"]
+margin_top = 236.0
+margin_right = 1792.0
+margin_bottom = 296.0
+custom_constants/separation = 32
+
+[node name="save" type="Button" parent="container/settings/buttons"]
+margin_right = 320.0
+margin_bottom = 60.0
+rect_min_size = Vector2( 320, 60 )
+text = "Save"
+
+[node name="back" type="Button" parent="container/settings/buttons"]
+margin_left = 352.0
+margin_right = 672.0
+margin_bottom = 60.0
+rect_min_size = Vector2( 320, 60 )
 text = "Back"
 
 [node name="click" type="AudioStreamPlayer" parent="container"]
@@ -370,6 +481,7 @@ bus = "Music"
 
 [connection signal="pressed" from="container/main/host" to="." method="_on_main_host_pressed"]
 [connection signal="pressed" from="container/main/connect" to="." method="_on_main_connect_pressed"]
+[connection signal="pressed" from="container/main/settings" to="." method="_on_settings_pressed"]
 [connection signal="pressed" from="container/main/quit" to="." method="_on_main_quit_pressed"]
 [connection signal="value_changed" from="container/host/bot_count/slider" to="." method="_on_bot_count_changed"]
 [connection signal="value_changed" from="container/host/max_score/slider" to="." method="_on_max_score_changed"]
@@ -377,4 +489,8 @@ bus = "Music"
 [connection signal="pressed" from="container/host/buttons/back" to="." method="_on_host_back_pressed"]
 [connection signal="pressed" from="container/connect/buttons/connect" to="." method="_on_connect_pressed"]
 [connection signal="pressed" from="container/connect/buttons/back" to="." method="_on_connect_back_pressed"]
+[connection signal="value_changed" from="container/settings/res/slider" to="." method="_on_res_value_changed"]
+[connection signal="value_changed" from="container/settings/res_scale/slider" to="." method="_on_rs_value_changed"]
+[connection signal="pressed" from="container/settings/buttons/save" to="." method="_on_settings_save_pressed"]
+[connection signal="pressed" from="container/settings/buttons/back" to="." method="_on_settings_back_pressed"]
 [connection signal="pressed" from="message/container/buttons/ok" to="." method="_on_message_ok_pressed"]

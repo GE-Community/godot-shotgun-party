@@ -25,6 +25,9 @@ func _physics_process(delta):
 func is_server():
 	return get_tree().is_network_server()
 
+func reset():
+	get_tree().network_peer = null
+
 func create_client(address : String):
 	# Connect network events
 	var _peer_connected = get_tree().connect("network_peer_connected", self, "_on_peer_connected")

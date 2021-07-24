@@ -2,6 +2,7 @@
 
 [ext_resource path="res://materials/map/common.material" type="Material" id=1]
 
+
 [sub_resource type="ProceduralSky" id=1]
 radiance_size = 1
 sky_top_color = Color( 0.184314, 0.211765, 0.415686, 1 )

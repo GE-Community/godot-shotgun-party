@@ -4,6 +4,7 @@ var player : Player
 
 onready var main = get_tree().root.get_child(get_tree().root.get_child_count() - 1)
 onready var menu = main.get_node("menu")
+onready var hud = main.get_node("hud")
 
 # Maps
 onready var map_scns = [preload("res://scenes/maps/map.tscn")]
@@ -51,6 +52,10 @@ func spawn_gobot(node_name : String, controller_type : int):
 
 func remove_gobot(id : int):
 	main.main_pass.get_node(str(id)).free()
+
+func reload():
+	for n in main.main_pass.get_children():
+		n.queue_free()
 
 func get_spawn():
 	var spawns = main.main_pass.get_node_or_null("map/spawns")
