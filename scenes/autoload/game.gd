@@ -14,6 +14,8 @@ onready var controllers = [
 	preload("res://scenes/controllers/bot.tscn")
 ]
 var colors = ["#28304e", "#125624"]
+# Impacts
+onready var impact_scns = [preload("res://scenes/impacts/metal.tscn")]
 
 func _ready():
 	randomize()
@@ -31,14 +33,11 @@ func spawn_sound(stream : AudioStream, origin : Vector3, unit_db : float, lifeti
 	sound.global_transform.origin = origin
 	sound.play()
 
-#func create_impact(index : int, parent : Node, pos : Vector3, norm : Vector3):
-#	var impact = impact_scenes[index].instance()
-#	parent.add_child(impact)
-#	impact.global_transform.origin = pos + norm * 0.005
-#	impact.look_at(pos + norm, Vector3(1.0, 1.0, 0.0))
-#	impact.rotation = Vector3(impact.rotation.x, impact.rotation.y, rand_range(-1, 1))
-#	var rand_scale = rand_range(1.0, 1.5)
-#	impact.scale = Vector3(rand_scale, rand_scale, rand_scale)
+func create_impact(index : int, parent : Node, pos : Vector3, norm : Vector3):
+	var impact = impact_scns[index].instance()
+	parent.add_child(impact)
+	impact.global_transform.origin = pos + norm * 0.01
+	impact.look_at(pos + norm, Vector3(1.0, 1.0, 0.0))
 
 func spawn_map(map_id : int):
 	var map = map_scns[map_id].instance()

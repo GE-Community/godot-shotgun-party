@@ -4,6 +4,9 @@ class_name Boomstick
 const MAX_LENGTH : float = 1000.0
 const COOLDOWN : float = 0.5
 const KNOCKBACK : float = 25.0
+const MAX_PELLETS : int = 4
+const MAX_PELLET_DAMAGE : float = 25.0
+const SPREAD : float = 50.0
 
 var muzzle : Position3D
 export var muzzle_path : NodePath
@@ -43,14 +46,17 @@ func primary():
 		# Raycast
 		var ray_dss = get_world().direct_space_state
 		# Central ray
-		var ray_from = shooter.head.global_transform.origin
-		var ray_to = shooter.head.global_transform.origin + shooter.head.global_transform.basis.z * -MAX_LENGTH
-		var ray_result = ray_dss.intersect_ray(ray_from, ray_to, [shooter])
-		if ray_result:
-			if ray_result.collider is BaseBody:
-				var impulse = (ray_result.position - ray_from).normalized() * 15.0
-				ray_result.collider.add_impulse(impulse)
-				ray_result.collider.hit(100.0, shooter)
+		for p in MAX_PELLETS:
+			var ray_from = shooter.head.global_transform.origin
+			var ray_to = ray_from + (shooter.head.global_transform.basis.z * -MAX_LENGTH) + random_spread(SPREAD)
+			var ray_result = ray_dss.intersect_ray(ray_from, ray_to, [shooter])
+			if ray_result:
+				if ray_result.collider is BaseBody:
+					var impulse = (ray_result.position - ray_from).normalized() * 15.0
+					ray_result.collider.add_impulse(impulse)
+					ray_result.collider.hit(MAX_PELLET_DAMAGE * rand_range(0.9, 1.0), shooter)
+				if ray_result.collider is StaticBody:
+					Game.create_impact(0, ray_result.collider, ray_result.position, ray_result.normal)
 		# Visual ray
 #		var vray_from = next_frame_transform.origin
 #		var vray_result = ray_dss.intersect_ray(vray_from, ray_to, [shooter])
@@ -64,3 +70,6 @@ func primary():
 #		trace.get_node("mesh_instance").mesh.set("height", trace_length)
 #		if ray_result:
 #			trace.look_at(ray_result.position, Vector3.UP)
+
+func random_spread(spread : float):
+	return Vector3(rand_range(-spread, spread), rand_range(-spread, spread), rand_range(-spread, spread))

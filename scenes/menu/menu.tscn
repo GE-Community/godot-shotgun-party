@@ -7,7 +7,7 @@
 [ext_resource path="res://fonts/poppins_bold.ttf" type="DynamicFontData" id=7]
 [ext_resource path="res://misc/default.theme" type="Theme" id=9]
 
-[sub_resource type="DynamicFont" id=9]
+[sub_resource type="DynamicFont" id=1]
 size = 14
 font_data = ExtResource( 5 )
 
@@ -39,8 +39,7 @@ __meta__ = {
 }
 
 [node name="bg" type="ColorRect" parent="."]
-anchor_right = 1.0
-anchor_bottom = 1.0
+rect_min_size = Vector2( 1280, 720 )
 color = Color( 0.215686, 0.227451, 0.262745, 1 )
 __meta__ = {
 "_edit_lock_": true,
@@ -55,7 +54,7 @@ margin_left = 64.0
 margin_top = 64.0
 margin_right = -64.0
 margin_bottom = -64.0
-custom_fonts/font = SubResource( 9 )
+custom_fonts/font = SubResource( 1 )
 text = "0.0.0"
 align = 2
 valign = 2
@@ -79,7 +78,7 @@ __meta__ = {
 }
 
 [node name="title" type="Label" parent="container"]
-margin_right = 896.0
+margin_right = 1152.0
 margin_bottom = 46.0
 custom_fonts/font = SubResource( 2 )
 text = "Godot Shotgun Party"
@@ -89,7 +88,7 @@ __meta__ = {
 
 [node name="main" type="GridContainer" parent="container"]
 margin_top = 62.0
-margin_right = 896.0
+margin_right = 1152.0
 margin_bottom = 238.0
 rect_min_size = Vector2( 200, 0 )
 custom_constants/vseparation = 16
@@ -154,12 +153,12 @@ align = 0
 [node name="host" type="VBoxContainer" parent="container"]
 visible = false
 margin_top = 62.0
-margin_right = 896.0
+margin_right = 1152.0
 margin_bottom = 241.0
 custom_constants/separation = 16
 
 [node name="subtitle" type="Label" parent="container/host"]
-margin_right = 896.0
+margin_right = 1152.0
 margin_bottom = 35.0
 custom_fonts/font = SubResource( 8 )
 text = "Host"
@@ -170,7 +169,7 @@ __meta__ = {
 
 [node name="bot_count" type="HBoxContainer" parent="container/host"]
 margin_top = 51.0
-margin_right = 896.0
+margin_right = 1152.0
 margin_bottom = 83.0
 custom_constants/separation = 32
 __meta__ = {
@@ -195,7 +194,7 @@ ticks_on_borders = true
 
 [node name="value" type="Label" parent="container/host/bot_count"]
 margin_left = 424.0
-margin_right = 429.0
+margin_right = 435.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 0, 32 )
 text = "0"
@@ -203,7 +202,7 @@ valign = 1
 
 [node name="max_score" type="HBoxContainer" parent="container/host"]
 margin_top = 99.0
-margin_right = 896.0
+margin_right = 1152.0
 margin_bottom = 131.0
 custom_constants/separation = 32
 __meta__ = {
@@ -228,7 +227,7 @@ ticks_on_borders = true
 
 [node name="value" type="Label" parent="container/host/max_score"]
 margin_left = 424.0
-margin_right = 429.0
+margin_right = 435.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 0, 32 )
 text = "0"
@@ -236,7 +235,7 @@ valign = 1
 
 [node name="buttons" type="HBoxContainer" parent="container/host"]
 margin_top = 147.0
-margin_right = 896.0
+margin_right = 1152.0
 margin_bottom = 179.0
 custom_constants/separation = 32
 
