@@ -1,9 +1,9 @@
 # TODO
-
-### Gameplay
+> Plans for the project
 - More boomstick
+- Maps
+- Game modes
+- Abilities
+- HUD
+- Mod support
 - Settings
-
-### Misc
-- Setup a Discord server
-- Quit deleting stuff, lol
