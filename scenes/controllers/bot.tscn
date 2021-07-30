@@ -118,11 +118,14 @@ script = ExtResource( 1 )
 collision_layer = 8
 collision_mask = 31
 
+[node name="skeleton" parent="body/model" index="0"]
+bones/22/bound_children = [ NodePath("a_hand_r") ]
+
 [node name="mesh_instance" parent="body/model/skeleton" index="0"]
 material/0 = SubResource( 9 )
 
 [node name="a_hand_r" parent="body/model/skeleton" index="1"]
-transform = Transform( -0.974152, -0.172704, 0.145607, 0.21758, -0.890627, 0.399299, 0.0607211, 0.42066, 0.905184, -0.665233, 0.771534, 0.157155 )
+transform = Transform( -0.997434, -0.0325528, 0.0637647, 0.0697226, -0.239426, 0.968407, -0.0162579, 0.970367, 0.241081, -0.60439, 0.980324, -0.0397277 )
 
 [node name="animation_tree" parent="body/model" index="2"]
 parameters/sm/playback = SubResource( 10 )
@@ -133,6 +136,8 @@ parameters/sm/playback = SubResource( 10 )
 
 [node name="weapon" parent="holder/weapons" instance=ExtResource( 8 )]
 muzzle_path = NodePath("../../../body/model/skeleton/a_hand_r/boomstick/muzzle")
+
+[node name="tween" type="Tween" parent="."]
 
 [editable path="body"]
 [editable path="holder/weapons/weapon"]

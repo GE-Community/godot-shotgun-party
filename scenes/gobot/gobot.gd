@@ -100,8 +100,8 @@ func respawn():
 	dead = false
 	health = 100.0
 	vel = Vector3.ZERO
+	visible = true
 	$collision_shape.disabled = false
-	$model.visible = true
 	if owner and owner is Player:
 		owner.get_node("holder").visible = true
 	global_transform = Game.get_spawn()

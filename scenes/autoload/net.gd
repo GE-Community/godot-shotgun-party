@@ -7,6 +7,12 @@ const PEER_RATE : float = 1.0/60.0
 
 var update_timer : float = 0.0
 
+var bot_count : int = 0
+signal host_config_updated
+
+func _ready():
+	var _host_config_connect = connect("host_config_updated", self, "_on_host_config_updated")
+
 func _physics_process(delta):
 	if is_instance_valid(Game.player) and get_tree().network_peer:
 		update_timer -= delta
@@ -52,6 +58,8 @@ func create_server():
 func _on_peer_connected(id):
 	# When other players connect a character with the controller type of Peer is created
 	Game.spawn_gobot(str(id), 1)
+	if is_server():
+		rpc_id(id, "update_host_config", bot_count)
 
 func _on_peer_disconnected(id):
 	# Remove unused character when player disconnects
@@ -60,14 +68,20 @@ func _on_peer_disconnected(id):
 func _on_connected_to_server():
 	# Upon successful connection get the unique network ID
 	# This ID is used to name the character node so the network can distinguish the characters
-	var id = get_tree().get_network_unique_id()
 	# Hide a menu
 	Game.menu.visible = false
 	Game.menu.get_node("drone").stop()
 	# Spawn map
 	Game.spawn_map(0)
+
+func _on_host_config_updated():
+	# After getting the host config
 	# Create an actual controllable character for us
+	var id = get_tree().get_network_unique_id()
+	# Create bots
 	Game.spawn_gobot(str(id), 0)
+	for i in bot_count:
+		Game.spawn_gobot("bot" + str(i), 2)
 
 func _on_connection_failed():
 	Game.menu.visible = true
@@ -84,10 +98,14 @@ puppet func update_world(world_state : Array):
 	for gobot in world_state[0]:
 		if int(gobot[0]) == get_tree().get_network_unique_id():
 			continue
-		Game.main.get_node(gobot[0]).update(gobot[1], gobot[2], gobot[3], gobot[4], gobot[5], gobot[6])
+		Game.main.main_pass.get_node(gobot[0]).update(gobot[1], gobot[2], gobot[3], gobot[4], gobot[5], gobot[6])
+
+puppet func update_host_config(new_bot_count : int):
+	bot_count = new_bot_count
+	emit_signal("host_config_updated")
 
 remote func update_peer(t : Vector3, ry : float, hrx : float , v : Vector3, f : bool, ap : bool):
-	var peer_gobot = Game.main.get_node(str(get_tree().get_rpc_sender_id())).body
+	var peer_gobot = Game.main.main_pass.get_node(str(get_tree().get_rpc_sender_id())).body
 	peer_gobot.translation = t
 	peer_gobot.rotation.y = ry
 	peer_gobot.head.rotation.x = hrx

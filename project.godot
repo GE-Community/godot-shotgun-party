@@ -94,8 +94,9 @@ Config="*res://scenes/autoload/config.gd"
 
 window/size/width=1920
 window/size/height=1080
-window/size/test_width=1280
-window/size/test_height=720
+window/size/always_on_top=true
+window/size/test_width=960
+window/size/test_height=540
 window/dpi/allow_hidpi=true
 window/vsync/use_vsync=false
 window/stretch/mode="2d"
@@ -165,5 +166,4 @@ common/physics_fps=120
 
 [rendering]
 
-quality/shadows/filter_mode=2
 environment/default_environment="res://misc/default_env.tres"

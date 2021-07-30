@@ -22,7 +22,8 @@ func _on_host_pressed():
 	yield(get_tree().create_timer(1.0), "timeout")
 	Game.spawn_map(0)
 	Game.spawn_gobot("1", 0)
-	for i in $container/host/bot_count/slider.value:
+	Net.bot_count = $container/host/bot_count/slider.value
+	for i in Net.bot_count:
 		Game.spawn_gobot("bot" + str(i), 2)
 	visible = false
 	$drone.stop()

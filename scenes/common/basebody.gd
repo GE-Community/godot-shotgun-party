@@ -55,7 +55,7 @@ func process_body(delta):
 	if action_jump and was_near_wall and can_wall_jump and !p_jump:
 		can_wall_jump = false
 		add_impulse((wall_normal.normalized() + Vector3.UP) * JUMP_FORCE)
-	if is_on_floor() or !was_near_wall:
+	if !was_near_wall:
 		can_wall_jump = true
 	
 	# Jumping and snapping to ground

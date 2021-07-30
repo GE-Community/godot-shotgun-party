@@ -19,11 +19,12 @@ func _ready():
 	body.weapon.shooter = body
 
 func _physics_process(delta):
-	if !body.dead:
+	if !body.dead and Net.is_server():
 		process_logic(delta)
 		body.process_steps(delta)
 		body.process_body(delta)
 		body.is_on_floor = body.is_on_floor()
+	if !body.dead:
 		body.process_anims(delta)
 
 func process_logic(delta):
@@ -64,3 +65,15 @@ func look_at_target(target_origin, delta):
 
 func set_target(new_target : BaseBody):
 	target = new_target
+
+func update(t : Vector3, ry : float, hrx : float, vel : Vector3, f : bool, ap : bool):
+	# Interpolate translation and rotation
+	$tween.interpolate_property(body, "translation", body.translation, t, Net.HOST_RATE, Tween.TRANS_LINEAR)
+	$tween.interpolate_property(body, "transform:basis", body.transform.basis, Basis(Vector3(body.rotation.x, ry, body.rotation.z)), Net.HOST_RATE, Tween.TRANS_LINEAR)
+	$tween.start()
+	# Head rotation already interpolated within animation process
+	body.head.rotation.x = hrx
+	body.vel = vel
+	body.is_on_floor = f
+	if ap:
+		body.weapon.primary()
